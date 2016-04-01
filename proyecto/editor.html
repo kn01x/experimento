@@ -1,0 +1,285 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
+
+		<title> Web TFG </title>
+
+		<!-- Script para jquery -->
+        <script  type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+        <script  type="text/javascript" src="scripts/loadInfo.js"></script>
+
+        <!-- Script para threeJS (visualizar modelos) -->
+		<script  type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/Camara.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/Luz.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/mtl.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/obj.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/Objetos.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/objmtl.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/orbit.js"></script>
+		<script  type="text/javascript"  src="./scripts/threejs/script.js"></script>
+
+		<!-- Scripts para SVG -->
+		<script  type="text/javascript" src="scripts/loadRoom.js"></script>
+		<script  type="text/javascript" src="scripts/loadMenu.js"></script>
+		<script  type="text/javascript" src="scripts/loadSculpture.js"></script>
+		<script  type="text/javascript" src="scripts/removeSculpture.js"></script>
+		<script  type="text/javascript" src="scripts/dragDropFunctions.js"></script>
+		<script  type="text/javascript" src="room.js"></script>
+		<script  type="text/javascript" src="sculpture.js"></script>
+		<script  type="text/javascript" src="firstCamera.js"></script>
+
+		<!-- Scripts para montar escenario X3D -->
+		<script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> 
+		<link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link> 
+		<script  type="text/javascript" src="scripts/createX3DScene.js"></script>
+		<script  type="text/javascript" src="scripts/loadX3DScene.js"></script>
+
+		<!-- CSS -->
+		<link href="./css/style.css" rel="stylesheet" type='text/css' />
+
+		<!-- Scripts Alba -->
+		<script  type="text/javascript" src="scripts/loadCamera.js"></script>
+		<script  type="text/javascript" src="scripts/loadPoint.js"></script>
+        <script  type="text/javascript" src="camera.js"></script>
+		<script  type="text/javascript" src="point.js"></script>
+
+		<script>
+			showMenu();
+			showSculptureMenu();
+		</script>
+    </head>
+	   
+	<!-- Se carga la escena threejs onload="main();" --> 
+	<body onload="main();" > 
+		<!-- Contenedor de salas -->
+		<div id="box_scene">
+			<!-- Lista con las salas que se guardan en el contenedor -->
+			<ul id="escenas"> 
+				<li id="imagen1"> 
+					<input  type="radio" name="controlRoom" id="boton1" onclick="loadRoom( 0 )"/>
+					<label for="boton1" class="boton"><img id="0" src="./img/menu/sala1.jpg"></label> 
+				</li>
+			  	<li id="imagen2"> 
+			  		<input  type="radio" name="controlRoom" id="boton2" onclick="loadRoom( 1 )" /> 
+			  		<label for="boton2" class="boton"><img id="1" src="./img/scene2.png"></label> 
+				</li>
+			  	<li id="imagen3"> 
+			  		<input  type="radio" name="controlRoom" id="boton3" onclick="loadRoom( 2 )" /> 
+			  		<label for="boton3" class="boton"><img id="2" src="./img/scene3.png"></label> 
+				</li>
+			  	<li id="imagen4"> 
+			  		<input  type="radio" name="controlRoom" id="boton4" onclick="loadRoom( 3 )" /> 
+			  		<label for="boton4" class="boton"><img id="3" src="./img/scene4.jpg"></label>
+			  	</li>
+			  	<li id="imagen5"> 
+			  		<input  type="radio" name="controlRoom" id="boton5" onclick="loadRoom( 4 )" /> 
+			  		<label for="boton5" class="boton"><img id="4" src="./img/scene4.jpg"></label>
+			  	</li>
+			  	<li id="imagen6"> 
+			  		<input  type="radio" name="controlRoom" id="boton6" onclick="loadRoom( 5 )" /> 
+			  		<label for="boton6" class="boton"><img id="5" src="./img/scene4.jpg"></label>
+			  	</li>
+			</ul>
+
+		</div>
+
+		<!-- Contenedor de esculturas -->
+		<div id="box_sculpture">
+			<!-- Lista con las esculturas que se guardan en el contenedor -->
+			<ul id="esculturas"> 
+				<li id="sculpture1"> 
+					<input  type="radio" name="controlSculpture" id="boton7" onclick="loadSculpture( 6 )"/>
+					<label for="boton7" class="boton"><img id="6" src="./img/menu/venus.png"></label> 
+				</li>
+			  	<li id="sculpture2"> 
+			  		<input  type="radio" name="controlSculpture" id="boton8" onclick="loadSculpture( 7 )" /> 
+			  		<label for="boton8" class="boton"><img id="7" src="./img/menu/thinker.jpg"></label> 
+				</li>
+			  	<li id="sculpture3"> 
+			  		<input  type="radio" name="controlSculpture" id="boton9" onclick="loadSculpture( 8 )" /> 
+			  		<label for="boton9" class="boton"><img id="8" src="./img/menu/david.png"></label> 
+				</li>
+			  	<li id="sculpture4"> 
+			  		<input  type="radio" name="controlSculpture" id="boton10" onclick="loadSculpture( 9 )" /> 
+			  		<label for="boton10" class="boton"><img id="9" src="./img/menu/dragon.jpg"></label>
+			  	</li>
+			  	<li id="sculpture5"> 
+			  		<input  type="radio" name="controlSculpture" id="boton11" onclick="loadSculpture( 10 )" /> 
+			  		<label for="boton11" class="boton"><img id="10" src="./img/menu/ramses2.jpg"></label>
+			  	</li>
+			  	<li id="sculpture6"> 
+			  		<input  type="radio" name="controlSculpture" id="boton12" onclick="loadSculpture( 11 )" /> 
+			  		<label for="boton12" class="boton"><img id="11" src="./img/menu/pascua.jpg"></label>
+			  	</li>
+			</ul>
+
+		</div>
+		
+		<!-- Cámaras -->
+		<div id="box_camera">
+			<ul id="cameras"> 
+				<li id="cameraD">
+					<input  type="radio" id="botonCameraD" onclick="loadNewCamera()"/>
+					<label for="botonCameraD" class="boton"><img src="./img/camera/add.jpg" alt="Add more"></label>
+				</li>
+				<li id="camera1">
+					<input  type="radio" id="botonCamera1" onclick="loadCamera(1)"/>
+					<label for="botonCamera1" class="boton"><img src="./img/camera/camera.jpg" alt="Camera"></label>
+				</li>
+				<li id="camera2">
+					<input  type="radio" id="botonCamera2" onclick="loadCamera(2)"/>
+					<label for="botonCamera2" class="boton"><img src="./img/camera/camera.jpg" alt="Camera"></label>
+				</li>
+				<li id="camera3">
+					<input  type="radio" id="botonCamera3" onclick="loadCamera(3)"/>
+					<label for="botonCamera3" class="boton"><img src="./img/camera/camera.jpg" alt="Camera"></label>
+				</li>
+				<li id="camera4">
+					<input  type="radio" id="botonCamera4" onclick="loadCamera(4)"/>
+					<label for="botonCamera4" class="boton"><img src="./img/camera/camera.jpg" alt="Camera"></label>
+				</li>
+				<li id="camera5">
+					<input  type="radio" id="botonCamera5" onclick="loadCamera(5)"/>
+					<label for="botonCamera5" class="boton"><img src="./img/camera/camera.jpg" alt="Camera"></label>
+				</li>
+			</ul>
+		</div>
+		<!-- Cámaras -->
+		<div id="box_control">
+			<ul id="controls">
+				<li id="controlD">
+					<input  type="radio" id="botonControlD" onclick="loadNewPoint()"/>
+					<label for="botonControlD" class="boton"><img src="./img/camera/add.jpg" alt="Add more"></label>
+				</li>
+				<!--<li id="control1">
+					<input  type="radio" id="botonControl1" onclick="loadPoint(1)"/>
+					<label for="botonControl1" class="boton"><img src="./img/camera/control.jpg" alt="Add more"></label>
+				</li>*-->
+			</ul>
+		</div>
+		<!--
+		<aside>
+			<input type="button" id="botonX3D" value="Descargar X3D" onclick="descargarArchivo(generarX3D(), 'archivo.x3d')"/> 
+			<p id=info>"flag: " </p> 
+		</aside> -->
+ 
+		<!-- ----------------------- PESTAÑAS ----------------------- -->
+
+		<section id="SFicha">
+			<ul id="tabs">
+			    <li><a href="#" title="tab1">Ficha Técnica</a></li>
+			    <li><a href="#" title="tab2">Escenario</a></li>
+			    <li><a href="#" title="tab3">Cámara Principal</a></li>  
+			</ul>
+
+			
+			<div id="content"> 
+			    <div id="tab1">
+			    	<div id="viewElement"></div>
+
+					<h1 id=titleFicha> Ficha Técnica </h1>
+
+				 	<form action="" method="post">
+					    <p>
+					    	<div class="row">
+						    	<label for="nombre">Nombre : </label> 
+						    	<input type="text" id="nombre" size="30"><br />
+						    </div>
+
+						    <div class="row">
+						    	<label for="autoria">Autoría: </label>
+				          		<input type="text" id="autoria" size="30"><br>
+				          	</div>
+
+				          	<div class="row">
+						    	<label for="cronologia">Cronología: </label>
+				          		<input type="text" id="cronologia" size="30"><br>
+				          	</div>
+
+				          	<div class="row">
+						    	<label for="tecnica">Técnica: </label>
+				          		<input type="text" id="tecnica" size="30"><br>
+				          	</div>
+
+				          	<div class="row">
+						    	<label for="medidas">Medidas: </label>
+				          		<input type="text" id="medidas" size="30"><br>
+				          	</div>
+
+				          	<div class="row">
+						    	<label for="titularidad">Titularidad: </label>
+				          		<input type="text" id="titularidad" size="30"><br>
+				          	</div>
+
+				          	<div id="boxTextInfo">
+								<label for="informacion">Información: </label><br />
+								<textarea id="informacion" class="input" name="informacion" rows="7" cols="30"></textarea><br />
+							</div>
+
+							<div id="botonesFicha">
+						    	<input type="submit" value="Actualizar"> 
+						    	<input type="reset" value="Restablecer">
+						    	<input type="reset" value="Generar X3D" onClick="descargarArchivo(generarX3D(), 'archivo.x3d')";>
+						    </div>
+					    </p>
+		 			</form> 
+			    </div>
+			    <div id="tab2">
+			    	<X3D id="the_scene">
+						<!--<Scene>
+							<!--<NavigationInfo headlight='false'></NavigationInfo>
+							<Viewpoint description="Faceted box, smooth shading" position="0 0 25"></Viewpoint>
+							<PointLight id='point' on='TRUE' intensity='0.9000' color='0.9 0.9 0.9' location='0 0 0 ' radius='5000000' ></PointLight>
+						 	<Background backUrl='space.jpg'></Background>
+							<inline url="./x3d/scene.x3d"  translation="0 0 0"> </inline> 
+						</Scene> -->
+					</X3D>
+			    </div>
+			    <div id="tab3">
+			    	<h1 id=titleFicha> Cámara Principal </h1>
+
+				 	<form action="" method="post">
+					    <p>
+					    	<div class="row">
+						    	<label for="altura">Altura : </label> 
+						    	<input type="text" id="altura" size="30"><br />
+						    </div>
+
+						    <div class="row">
+						    	<label for="zancada">Zancada: </label>
+				          		<input type="text" id="zancada" size="30"><br>
+				          	</div>
+				        </p>
+				    </form>
+
+				    <X3D id="FPCscene">
+						<Scene>
+							<NavigationInfo headlight='false' speed='1' avatarSize='60'></NavigationInfo>
+							<Viewpoint description="Faceted box, smooth shading" position="0 0 25"></Viewpoint>
+							<PointLight id='point' on='TRUE' intensity='0.9000' color='0.9 0.9 0.9' location='0 0 0 ' radius='5000000' ></PointLight>
+						 	<Background backUrl='space.jpg'></Background>
+							<inline url="./x3d/scene.x3d"  translation="0 0 0"> </inline> 
+						</Scene>
+					</X3D>
+			    </div>
+			</div>
+		</section>
+
+		<!-- Canvas de svg -->
+		<svg id="lienzo" width="500" height="500" viewbox="0 0 500 500";
+			onload='Init(evt)'
+			onmousedown='Grab(evt)'
+			onmousemove='Drag(evt)'
+			onmouseup='Drop(evt)'>
+            <g id="room_level"></g>
+			<g id="sculpture_level"></g>
+            <g id="line_level"></g>
+            <g id="camera_level"></g>
+			<g id="point_level"></g>
+		</svg>
+
+	</body>
+</html>
